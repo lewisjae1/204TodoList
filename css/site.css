@@ -30,3 +30,9 @@
     border: .1em solid black;
     margin-bottom: 1em;
 }
+
+span{
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}

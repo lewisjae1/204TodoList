@@ -25,16 +25,33 @@ window.onload = function(){
 }
 
 function main(){
+    resetSpan();
     if (isValid()){
         let item = getToDoItem();
         displayToDoItem(item);
     }
 }
 
+function resetSpan(){
+    document.getElementById("dueDateSpan").innerText = "*";
+    document.getElementById("titleSpan").innerText = "*";
+}
+
 /**
  * Check for data is valid
  */
 function isValid():boolean{
+    if(getInput("dueDate").value == ""){
+        document.getElementById("dueDateSpan").innerText = "Please select date";
+    }
+    if(getInput("title").value == ""){
+        document.getElementById("titleSpan").innerText = "Please type something";
+    }
+
+    if(getInput("dueDate").value == "" || getInput("title").value == ""){
+        return false;
+    }
+    
     return true;
 }
 

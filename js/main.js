@@ -13,12 +13,26 @@ window.onload = function () {
     addItem.onclick = main;
 };
 function main() {
+    resetSpan();
     if (isValid()) {
         var item = getToDoItem();
         displayToDoItem(item);
     }
 }
+function resetSpan() {
+    document.getElementById("dueDateSpan").innerText = "*";
+    document.getElementById("titleSpan").innerText = "*";
+}
 function isValid() {
+    if (getInput("dueDate").value == "") {
+        document.getElementById("dueDateSpan").innerText = "Please select date";
+    }
+    if (getInput("title").value == "") {
+        document.getElementById("titleSpan").innerText = "Please type something";
+    }
+    if (getInput("dueDate").value == "" || getInput("title").value == "") {
+        return false;
+    }
     return true;
 }
 function getToDoItem() {
