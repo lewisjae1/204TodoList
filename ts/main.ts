@@ -22,6 +22,13 @@ function getInput(id):HTMLInputElement{
 window.onload = function(){
     let addItem = document.getElementById("add");
     addItem.onclick = main;
+
+    loadSavedItem();
+}
+
+function loadSavedItem(){
+    let item = getTodo();
+    displayToDoItem(item);
 }
 
 function main(){
@@ -29,6 +36,7 @@ function main(){
     if (isValid()){
         let item = getToDoItem();
         displayToDoItem(item);
+        saveTodo(item);
     }
 }
 
@@ -82,7 +90,9 @@ function displayToDoItem(item:ToDoItem):void{
     itemText.innerText = item.title
 
     let itemDate = document.createElement("p");
-    itemDate.innerText = item.dueDate.toDateString();
+    //itemDate.innerText = item.dueDate.toDateString();
+    let dueDate = new Date(item.dueDate.toString());
+    itemDate.innerText = dueDate.toDateString();
 
     let itemDiv = document.createElement("div");
 
@@ -116,3 +126,17 @@ function markAsComplete(){
 
 // Task: Allow use to mark a ToDoItem as completed
 // Task: Store ToDoItems in web storage
+
+function saveTodo(item:ToDoItem):void{
+    let itemString = JSON.stringify(item);
+
+    localStorage.setItem(todokey, itemString);
+}
+
+const todokey = "todo";
+
+function getTodo():ToDoItem{
+    let itemString = localStorage.getItem(todokey);
+    let item = JSON.parse(itemString);
+    return item;
+}

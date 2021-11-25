@@ -31,8 +31,15 @@
     margin-bottom: 1em;
 }
 
-span{
+#titleSpan, #dueDateSpan{
     color: red;
     font-style: italic;
     font-weight: bold;
+}
+
+#complete-items, #incomplete-items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
