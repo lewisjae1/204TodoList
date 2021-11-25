@@ -11,11 +11,13 @@ function getInput(id) {
 window.onload = function () {
     var addItem = document.getElementById("add");
     addItem.onclick = main;
-    loadSavedItem();
+    loadSavedItems();
 };
-function loadSavedItem() {
-    var item = getTodo();
-    displayToDoItem(item);
+function loadSavedItems() {
+    var itemArray = getTodoItems();
+    for (var i = 0; i < itemArray.length; i++) {
+        displayToDoItem(itemArray[i]);
+    }
 }
 function main() {
     resetSpan();
@@ -81,11 +83,16 @@ function markAsComplete() {
     completedItems.appendChild(itemDiv);
 }
 function saveTodo(item) {
-    var itemString = JSON.stringify(item);
-    localStorage.setItem(todokey, itemString);
+    var currItems = getTodoItems();
+    if (currItems == null) {
+        currItems = new Array();
+    }
+    currItems.push(item);
+    var currItemsString = JSON.stringify(currItems);
+    localStorage.setItem(todokey, currItemsString);
 }
 var todokey = "todo";
-function getTodo() {
+function getTodoItems() {
     var itemString = localStorage.getItem(todokey);
     var item = JSON.parse(itemString);
     return item;
